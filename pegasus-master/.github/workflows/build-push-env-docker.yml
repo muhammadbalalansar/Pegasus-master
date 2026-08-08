@@ -1,0 +1,123 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+---
+name: BuildCompilationEnvDocker - build and publish multi compilation OS env
+
+on:
+  push:
+    branches:
+      - master
+      - 'v[0-9]+.*' # release branch
+      - ci-test # testing branch for github action
+      - '*dev' # developing branch
+    paths:
+      - 'docker/pegasus-build-env/**'
+      - '.github/workflows/build-push-env-docker.yml'
+
+  # for manually triggering workflow
+  workflow_dispatch:
+
+jobs:
+  build_compilation_env_docker_images:
+    runs-on: ubuntu-latest
+    env:
+      # The glibc version on ubuntu1804 is lower than the node20 required, so
+      # we need to force the node version to 16.
+      # See more details: https://github.com/actions/checkout/issues/1809
+      ACTIONS_RUNNER_FORCE_ACTIONS_NODE_VERSION: node16
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+    strategy:
+      fail-fast: false
+      matrix:
+        dockertag:
+          - ubuntu1804
+          - ubuntu2004
+          - ubuntu2204
+          - rockylinux9
+    steps:
+      - name: Checkout
+        # The glibc version on ubuntu1804 is lower than the actions/checkout@v4 required, so
+        # we need to force to use actions/checkout@v3.
+        # actions/checkout@v4.3.1
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Set up QEMU
+        # docker/setup-qemu-action@v3.7.0
+        uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130
+      - name: Set up Docker Buildx
+        # docker/setup-buildx-action@v3.12.0
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
+      - name: Login to DockerHub
+        # docker/login-action@3.7.0
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        # docker/build-push-action@v6.19.2
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8
+        with:
+          platforms: linux/amd64
+          context: .
+          file: ./docker/pegasus-build-env/${{ matrix.dockertag }}/Dockerfile
+          push: true
+          tags: |
+            apache/pegasus:build-env-${{ matrix.dockertag }}-${{ github.ref_name }}
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  build_go_compilation_env_docker_images:
+    runs-on: ubuntu-latest
+    env:
+      ACTIONS_RUNNER_FORCE_ACTIONS_NODE_VERSION: node16
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        # actions/checkout@v4.3.1
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Set up QEMU
+        # docker/setup-qemu-action@v3.7.0
+        uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130
+      - name: Set up Docker Buildx
+        # docker/setup-buildx-action@v3.12.0
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
+      - name: Login to DockerHub
+        # docker/login-action@3.7.0
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        # docker/build-push-action@v6.19.2
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8
+        with:
+          platforms: linux/amd64
+          context: .
+          file: ./docker/pegasus-build-env/go/Dockerfile
+          push: true
+          tags: |
+            apache/pegasus:build-env-ubuntu2204-${{ github.ref_name }}-go
+          # go-client imports thrift package of 0.13.0, so we must use thrift-compiler 0.13.0
+          # to generate code as well. The thrift-compiler version on ubuntu-20.04 is 0.13.0,
+          # however ubuntu-20.04 LTS runner has been retired on 2025-04-15. Thus we choose to
+          # build thrift 0.13.0 in a image based on ubuntu-22.04 whose thrift version is 0.16.0
+          # by default.
+          build-args: |
+            THRIFT_VERSION=0.13.0
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}

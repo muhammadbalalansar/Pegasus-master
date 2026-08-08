@@ -1,0 +1,51 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+---
+linters:
+  # TODO(wangdan): consider replacing 'golint' with 'revive' because 'golint' is
+  # deprecated (since v1.41.0, its repository has been archived by the owner).
+  #
+  # After Go is upgraded to v1.22, consider replacing 'exportloopref' with 'copyloopvar'
+  # because as of Go 1.22, the problem resolved by 'exportloopref' no longer occurs and
+  # fixed by Go team (https://go.dev/blog/loopvar-preview).
+  #
+  # After all of above are bumped, consider upgrading golangci-lint (e.g. to v1.64.8).
+  enable:
+    - gofmt
+    - goimports
+    - revive
+    - bodyclose
+    - exhaustive
+    - exportloopref
+
+linters-settings:
+  revive:
+    rules:
+      # https://github.com/mgechev/revive/blob/HEAD/RULES_DESCRIPTIONS.md#var-naming
+      - name: var-naming
+        severity: warning
+        disabled: false
+        exclude: [""]
+        arguments:
+          - ["ID", "RPC"] # AllowList
+          - [] # DenyList
+          - - upperCaseConst: true # Extra parameter (upper-case-const|skip-package-name-checks)
+  exhaustive:
+    # indicates that switch statements are to be considered exhaustive if a
+    # 'default' case is present, even if all enum members aren't listed in the
+    # switch
+    default-signifies-exhaustive: true

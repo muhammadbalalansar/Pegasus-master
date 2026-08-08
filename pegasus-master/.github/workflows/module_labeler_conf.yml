@@ -1,0 +1,88 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+---
+
+github:
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/**/*
+admin-cli:
+- changed-files:
+  - any-glob-to-any-file:
+    - admin-cli/**/*
+collector:
+- changed-files:
+  - any-glob-to-any-file:
+    - collector/**/*
+docker:
+- changed-files:
+  - any-glob-to-any-file:
+    - docker/**/*
+go-client:
+- changed-files:
+  - any-glob-to-any-file:
+    - go-client/**/*
+java-client:
+- changed-files:
+  - any-glob-to-any-file:
+    - java-client/**/*
+nodejs-client:
+- changed-files:
+  - any-glob-to-any-file:
+    - nodejs-client/**/*
+pegic:
+- changed-files:
+  - any-glob-to-any-file:
+    - pegic/**/*
+python-client:
+- changed-files:
+  - any-glob-to-any-file:
+    - python-client/**/*
+scala-client:
+- changed-files:
+  - any-glob-to-any-file:
+    - scala-client/**/*
+thirdparty:
+- changed-files:
+  - any-glob-to-any-file:
+    - thirdparty/**/*
+thrift:
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/*.thrift'
+docs:
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/*.md'
+scripts:
+- changed-files:
+  - any-glob-to-any-file:
+    - 'admin_tools/**/*'
+    - 'build_tools/**/*'
+    - '**/*.sh'
+build:
+- changed-files:
+  - any-glob-to-any-file:
+    - 'cmake_modules/**/*'
+    - '**/CMakeLists.txt'
+    - 'run.sh'
+cpp:
+- changed-files:
+  - any-glob-to-any-file:
+  # TODO(yingchun): add more fine-grained labels
+    - 'src/**/*.h'
+    - 'src/**/*.cpp'
