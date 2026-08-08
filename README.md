@@ -80,10 +80,6 @@ Pegasus has support for several languages:
 - [Node.js](https://github.com/apache/incubator-pegasus/blob/master/nodejs-client)
 - [Scala](https://github.com/apache/incubator-pegasus/blob/master/scala-client)
 
-## Contact us
-
-- Send emails to the Apache Pegasus developer mailing list: `dev@pegasus.apache.org`. This is the place where topics around development, community, and problems are officially discussed. Please remember to subscribe to the mailing list via `dev-subscribe@pegasus.apache.org`.
-
 
 - GitHub Issues: submit an issue when you have any idea to improve Pegasus, and when you encountered some bugs or problems.
 
