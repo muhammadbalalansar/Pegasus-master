@@ -84,6 +84,7 @@ Pegasus has support for several languages:
 
 - Send emails to the Apache Pegasus developer mailing list: `dev@pegasus.apache.org`. This is the place where topics around development, community, and problems are officially discussed. Please remember to subscribe to the mailing list via `dev-subscribe@pegasus.apache.org`.
 
+
 - GitHub Issues: submit an issue when you have any idea to improve Pegasus, and when you encountered some bugs or problems.
 
 ## Related Projects
