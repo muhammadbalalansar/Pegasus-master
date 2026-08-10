@@ -56,6 +56,7 @@ relies merely on the local filesystem.
 
 
 Apart from the performance requirements, we also need a storage system
+
 to ensure multiple-level data safety and support fast data migration
 between data centers, automatic load balancing, and online partition split.
 
