@@ -39,6 +39,7 @@ Please use [GitHub Releases][github-release] instead of the `master` branch in o
 
 Apache Pegasus is a distributed key-value storage system which is designed to be:
 
+
 - **horizontally scalable**: distributed using hash-based partitioning
 - **strongly consistent**: ensured by [PacificA][PacificA] consensus protocol
 - **high-performance**: using [RocksDB][rocksdb] as underlying storage engine
