@@ -44,7 +44,6 @@ Apache Pegasus is a distributed key-value storage system which is designed to be
 - **high-performance**: using [RocksDB][rocksdb] as underlying storage engine
 - **simple**: well-defined, easy-to-use APIs
 
-
 ## Background
 
 Pegasus targets to fill the gap between Redis and [HBase][hbase]. As the former
