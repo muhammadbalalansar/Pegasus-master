@@ -56,7 +56,6 @@ is in-memory, low latency, but does not provide a strong-consistency guarantee.
 And unlike the latter, Pegasus is entirely written in C++ and its write-path
 relies merely on the local filesystem.
 
-
 Apart from the performance requirements, we also need a storage system
 
 to ensure multiple-level data safety and support fast data migration
