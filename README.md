@@ -81,7 +81,8 @@ Pegasus has support for several languages:
 - [Node.js](https://github.com/apache/incubator-pegasus/blob/master/nodejs-client)
 - [Scala](https://github.com/apache/incubator-pegasus/blob/master/scala-client)
 
-- GitHub Issues: submit an issue when you have any idea to improve Pegasus, and when you encountered some bugs or problems.
+- GitHub Issues: submit an issue when you have any idea to improve Pegasus, and when you encountered some bugs or problems. 
+
 
 ## Related Projects
 
