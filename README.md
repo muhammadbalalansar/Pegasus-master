@@ -92,7 +92,7 @@ Test tools:
 
 Data import/export tools:
 
-- [DataX](https://github.com/xiaomi/pegasus-datax)
+- [DataX] :(https://github.com/xiaomi/pegasus-datax)
 
 ## License :
 
