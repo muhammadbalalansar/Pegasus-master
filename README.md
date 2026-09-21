@@ -30,9 +30,8 @@ under the License.
 
 ![pegasus-logo](https://github.com/apache/incubator-pegasus-website/blob/master/assets/images/pegasus-logo-inv.png)
 
-[![Lint and build regularly](https://github.com/apache/incubator-pegasus/actions/workflows/regular-build.yml/badge.svg)](https://github.com/apache/incubator-pegasus/actions/workflows/regular-build.yml)
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Releases
+[![Lint and build regularly](https://github.com/apache/incubator-pegasus/actions/workflows/regular-build.yml/badge.svg)](https://github.com/apache/incubator-pegasus/actions/workflows/regular-b
+
 
 **Note**: The `master` branch may be in an *unstable or even in a broken state* during development.
 Please use [GitHub Releases][github-release] instead of the `master` branch in order to get stable binaries.
