@@ -30,7 +30,6 @@ under the License.
 
 ![pegasus-logo](https://github.com/apache/incubator-pegasus-website/blob/master/assets/images/pegasus-logo-inv.png)
 
-[![Lint and build regularly](https://github.com/apache/incubator-pegasus/actions/workflows/regular-build.yml/badge.svg)](https://github.com/apache/incubator-pegasus/actions/workflows/regular-b
 
 
 **Note**: The `master` branch may be in an *unstable or even in a broken state* during development.
